@@ -1,0 +1,132 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  auth:
+    host: localhost
+    paths: "/auth/*"
+  order:
+    host: localhost
+    paths: "/order/*"
+  cart:
+    host: localhost
+    paths: "/cart/*"
+  product:
+    host: localhost
+    paths: "/product/*"
+  tenant:
+    host: localhost
+    paths: "/tenant/*"
+  wishlist:
+    host: localhost
+    paths: "/wishlist/*"
+serviceEndpoints:
+  auth-service:
+    url: "http://localhost:8884/api/auth/"
+  order-service:
+    url: "http://localhost:8885/api/order/"
+  cart-service:
+    url: "http://localhost:8885/api/cart/"
+  product-service:
+    url: "http://localhost:8886/api/product/"
+  tenant-service:
+    url: "http://localhost:8885/api/tenant/"
+  wishlist-service:
+    url: "http://localhost:8885/api/wishlist/"
+policies:
+  - cors
+  - log
+  - proxy
+pipelines:
+  auth:
+    apiEndpoints:
+      - auth
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: auth-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  order:
+    apiEndpoints:
+      - order
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: order-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  cart:
+    apiEndpoints:
+      - cart
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: cart-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  product:
+    apiEndpoints:
+      - product
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: product-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  tenant:
+    apiEndpoints:
+      - tenant
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: tenant-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+  wishlist:
+    apiEndpoints:
+      - wishlist
+    policies:
+      - cors:
+          - action:
+              origin: false
+      - proxy:
+          - action:
+              serviceEndpoint: wishlist-service
+              changeOrigin: true
+              prependPath: false
+      - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}

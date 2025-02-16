@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1739702204580,
+      "tag": "0000_closed_domino",
+      "breakpoints": true
+    }
+  ]
+}
