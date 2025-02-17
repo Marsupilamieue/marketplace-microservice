@@ -6,7 +6,7 @@ import { User } from "../../commons/types";
 
 export const removeProductFromWishlistService = async (
   id: string,
-  user: User
+  user_id: string
 ) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
@@ -16,7 +16,7 @@ export const removeProductFromWishlistService = async (
       ).generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new InternalServerErrorResponse("User ID is missing").generate();
     }
 
@@ -35,7 +35,7 @@ export const removeProductFromWishlistService = async (
       return new InternalServerErrorResponse("Wishlist not found").generate();
     }
 
-    if (wishlist.user_id !== user.id) {
+    if (wishlist.user_id !== user_id) {
       return new InternalServerErrorResponse(
         "User is not authorized to remove product from this wishlist"
       ).generate();

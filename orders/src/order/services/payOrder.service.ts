@@ -1,7 +1,6 @@
 import {
   BadRequestResponse,
   InternalServerErrorResponse,
-  NotFoundResponse,
 } from "../../commons/patterns";
 import { NewPayment } from "../../../db/schema/payment";
 import { payOrder } from "../dao/payOrder.dao";

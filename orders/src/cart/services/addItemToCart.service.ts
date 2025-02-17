@@ -4,10 +4,9 @@ import {
   NotFoundResponse,
 } from "../../commons/patterns";
 import { addItemToCart } from "../dao/addItemToCart.dao";
-import { User } from "../../commons/types";
 
 export const addItemToCartService = async (
-  user: User,
+  user_id: string,
   product_id: string,
   quantity: number
 ) => {
@@ -17,13 +16,13 @@ export const addItemToCartService = async (
       return new InternalServerErrorResponse("Tenant ID not found").generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new NotFoundResponse("User not found").generate();
     }
 
     const cartData: NewCart = {
       tenant_id: SERVER_TENANT_ID,
-      user_id: user.id,
+      user_id: user_id,
       product_id: product_id,
       quantity: quantity,
     };

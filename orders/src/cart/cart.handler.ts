@@ -5,8 +5,12 @@ export const getAllCartItemsHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  const { user } = req.body;
-  const response = await Service.getAllCartItemsService(user);
+  if (!req.body.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const user_id: string = req.body.user.id;
+  const response = await Service.getAllCartItemsService(user_id);
   return res.status(response.status).send(response.data);
 };
 
@@ -14,10 +18,14 @@ export const addItemToCartHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  const { user } = req.body;
+  if (!req.body.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const user_id: string = req.body.user.id;
   const { product_id, quantity } = req.body;
   const response = await Service.addItemToCartService(
-    user,
+    user_id,
     product_id,
     quantity
   );
@@ -28,9 +36,17 @@ export const editCartItemHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  const { user } = req.body;
+  if (!req.body.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const user_id: string = req.body.user.id;
   const { cart_id, quantity } = req.body;
-  const response = await Service.editCartItemService(user, cart_id, quantity);
+  const response = await Service.editCartItemService(
+    user_id,
+    cart_id,
+    quantity
+  );
   return res.status(response.status).send(response.data);
 };
 
@@ -38,8 +54,12 @@ export const deleteCartItemHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  const { user } = req.body;
+  if (!req.body.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const user_id: string = req.body.user.id;
   const { product_id } = req.body;
-  const response = await Service.deleteCartItemService(user, product_id);
+  const response = await Service.deleteCartItemService(user_id, product_id);
   return res.status(response.status).send(response.data);
 };

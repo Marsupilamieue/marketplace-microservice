@@ -1,9 +1,8 @@
 import { NewWishlist } from "../../../db/schema/wishlist";
 import { InternalServerErrorResponse } from "../../commons/patterns";
 import { createWishlist } from "../dao/createWishlist.dao";
-import { User } from "../../commons/types";
 
-export const createWishlistService = async (user: User, name: string) => {
+export const createWishlistService = async (user_id: string, name: string) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
     if (!SERVER_TENANT_ID) {
@@ -12,13 +11,13 @@ export const createWishlistService = async (user: User, name: string) => {
       ).generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new InternalServerErrorResponse("User ID is missing").generate();
     }
 
     const wishlistData: NewWishlist = {
       name,
-      user_id: user.id,
+      user_id: user_id,
       tenant_id: SERVER_TENANT_ID,
     };
 

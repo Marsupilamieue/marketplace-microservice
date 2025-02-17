@@ -5,11 +5,10 @@ import {
 } from "../../commons/patterns";
 import { getWishlistDetailByWishlistId } from "../dao/getWishlistDetailByWishlistId.dao";
 import { getWishlistById } from "../dao/getWishlistById.dao";
-import { User } from "../../commons/types";
 
 export const getWishlistByIdService = async (
   wishlist_id: string,
-  user: User
+  user_id: string
 ) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
@@ -29,7 +28,7 @@ export const getWishlistByIdService = async (
       return new NotFoundResponse("Wishlist not found").generate();
     }
 
-    if (wishlist.user_id !== user.id) {
+    if (wishlist.user_id !== user_id) {
       return new UnauthorizedResponse(
         "User is not authorized to access this wishlist"
       ).generate();

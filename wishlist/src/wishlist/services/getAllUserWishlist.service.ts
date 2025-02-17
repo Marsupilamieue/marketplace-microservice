@@ -3,9 +3,8 @@ import {
   NotFoundResponse,
 } from "../../commons/patterns";
 import { getAllUserWishlist } from "../dao/getAllUserWishlist.dao";
-import { User } from "../../commons/types";
 
-export const getAllUserWishlistService = async (user: User) => {
+export const getAllUserWishlistService = async (user_id: string) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
     if (!SERVER_TENANT_ID) {
@@ -14,11 +13,11 @@ export const getAllUserWishlistService = async (user: User) => {
       ).generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new NotFoundResponse("User ID is missing").generate();
     }
 
-    const wishlists = await getAllUserWishlist(SERVER_TENANT_ID, user.id);
+    const wishlists = await getAllUserWishlist(SERVER_TENANT_ID, user_id);
 
     return {
       data: wishlists,

@@ -7,14 +7,17 @@ import { deleteTenantById } from "../dao/deleteTenantById.dao";
 import { User } from "../../commons/types";
 import { getTenantById } from "../dao/getTenantById.dao";
 
-export const deleteTenantService = async (user: User, tenant_id: string) => {
+export const deleteTenantService = async (
+  user_id: string,
+  tenant_id: string
+) => {
   try {
     const tenant_information = await getTenantById(tenant_id);
     if (!tenant_information) {
       return new NotFoundResponse("Tenant not found").generate();
     }
 
-    if (tenant_information.tenants.owner_id !== user.id) {
+    if (tenant_information.tenants.owner_id !== user_id) {
       return new UnauthorizedResponse(
         "You are not allowed to delete this tenant"
       ).generate();

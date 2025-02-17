@@ -5,11 +5,10 @@ import {
   NotFoundResponse,
 } from "../../commons/patterns";
 import { createOrder } from "../dao/createOrder.dao";
-import axios, { AxiosResponse } from "axios";
-import { User, Product } from "../../commons/types";
+import axios from "axios";
 
 export const placeOrderService = async (
-  user: User,
+  user_id: string,
   shipping_provider: string
 ) => {
   try {
@@ -28,19 +27,19 @@ export const placeOrderService = async (
       return new NotFoundResponse("Shipping provider not found").generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new InternalServerErrorResponse("User id not found").generate();
     }
 
     // get the cart items
-    const cartItems = await getAllCartItems(SERVER_TENANT_ID, user.id);
+    const cartItems = await getAllCartItems(SERVER_TENANT_ID, user_id);
 
     // get the product datas
     const productIds = cartItems.map((item) => item.product_id);
     if (productIds.length === 0) {
       return new BadRequestResponse("Cart is empty").generate();
     }
-    const products: AxiosResponse<Product[], any> = await axios.post(
+    const products = await axios.post(
       `${process.env.PRODUCT_MS_URL}/product/many`,
       { productIds }
     );
@@ -53,7 +52,7 @@ export const placeOrderService = async (
     // create order
     const order = await createOrder(
       SERVER_TENANT_ID,
-      user.id,
+      user_id,
       cartItems,
       products.data,
       shipping_provider as

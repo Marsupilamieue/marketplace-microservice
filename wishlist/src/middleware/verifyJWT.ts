@@ -7,6 +7,12 @@ interface JWTUser extends JwtPayload {
   tenant_id: string;
 }
 
+declare module "express-serve-static-core" {
+  interface Request {
+    user?: JWTUser;
+  }
+}
+
 export const verifyJWT = async (
   req: Request,
   res: Response,

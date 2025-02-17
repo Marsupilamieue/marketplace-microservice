@@ -24,17 +24,17 @@ apiEndpoints:
     paths: "/wishlist/*"
 serviceEndpoints:
   auth-service:
-    url: "http://localhost:8884/api/auth/"
+    url: "http://localhost:8884/auth/"
   order-service:
-    url: "http://localhost:8885/api/order/"
+    url: "http://localhost:8885/order/"
   cart-service:
-    url: "http://localhost:8885/api/cart/"
+    url: "http://localhost:8885/cart/"
   product-service:
-    url: "http://localhost:8886/api/product/"
+    url: "http://localhost:8886/product/"
   tenant-service:
-    url: "http://localhost:8885/api/tenant/"
+    url: "http://localhost:8887/tenant/"
   wishlist-service:
-    url: "http://localhost:8885/api/wishlist/"
+    url: "http://localhost:8888/wishlist/"
 policies:
   - cors
   - log

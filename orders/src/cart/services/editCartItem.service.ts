@@ -1,10 +1,9 @@
 import { InternalServerErrorResponse } from "../../commons/patterns";
 import { editCartDataById } from "../dao/editCartDataById.dao";
 import { deleteCartItem } from "../dao/deleteCartItem.dao";
-import { User } from "../../commons/types";
 
 export const editCartItemService = async (
-  user: User,
+  user_id: string,
   cart_id: string,
   quantity?: number
 ) => {
@@ -14,13 +13,13 @@ export const editCartItemService = async (
       return new InternalServerErrorResponse("Tenant ID not found").generate();
     }
 
-    if (!user.id) {
+    if (!user_id) {
       return new InternalServerErrorResponse("User ID not found").generate();
     }
 
     let cart;
     if (quantity !== undefined && quantity < 1) {
-      cart = await deleteCartItem(SERVER_TENANT_ID, user.id, cart_id);
+      cart = await deleteCartItem(SERVER_TENANT_ID, user_id, cart_id);
       cart.quantity = 0;
     } else {
       cart = await editCartDataById(SERVER_TENANT_ID, cart_id, {
