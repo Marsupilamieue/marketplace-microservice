@@ -1,5 +1,5 @@
 import express from "express";
-import { validate, verifyJWT } from "../middleware";
+import { validate, verifyJWTProduct } from "../middleware/index";
 import * as Validation from "./validation";
 import * as Handler from "./product.handler";
 
@@ -24,37 +24,37 @@ router.get(
 );
 router.post(
   "",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.createProductSchema),
   Handler.createProductHandler
 );
 router.post(
   "/category",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.createCategorySchema),
   Handler.createCategoryHandler
 );
 router.put(
   "/:id",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.editProductSchema),
   Handler.editProductHandler
 );
 router.put(
   "/category/:category_id",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.editCategorySchema),
   Handler.editCategoryHandler
 );
 router.delete(
   "/:id",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.deleteProductSchema),
   Handler.deleteProductHandler
 );
 router.delete(
   "/category/:category_id",
-  verifyJWT,
+  verifyJWTProduct,
   validate(Validation.deleteCategorySchema),
   Handler.deleteCategoryHandler
 );

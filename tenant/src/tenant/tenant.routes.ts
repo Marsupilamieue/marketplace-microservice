@@ -1,5 +1,5 @@
 import express from "express";
-import { validate, verifyJWT } from "../middleware";
+import { validate, verifyJWTTenant } from "../middleware/";
 import * as Validation from "./validation";
 import * as Handler from "./tenant.handler";
 
@@ -7,25 +7,25 @@ const router = express.Router();
 
 router.get(
   "/:tenant_id",
-  verifyJWT,
+  verifyJWTTenant,
   validate(Validation.getTenantSchema),
   Handler.getTenantHandler
 );
 router.post(
   "",
-  verifyJWT,
+  verifyJWTTenant,
   validate(Validation.createTenantSchema),
   Handler.createTenantHandler
 );
 router.put(
   "/:old_tenant_id",
-  verifyJWT,
+  verifyJWTTenant,
   validate(Validation.editTenantSchema),
   Handler.editTenantHandler
 );
 router.delete(
   "",
-  verifyJWT,
+  verifyJWTTenant,
   validate(Validation.deleteTenantSchema),
   Handler.deleteTenantHandler
 );
