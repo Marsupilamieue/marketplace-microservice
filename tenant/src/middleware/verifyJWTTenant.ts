@@ -12,7 +12,6 @@ export const verifyJWTTenant = async (
     if (!token) {
       return res.status(401).send({ message: "Invalid token" });
     }
-
     const AUTH_SERVICE_URL =
       process.env.AUTH_SERVICE_URL || "http://auth-service:3000";
 
@@ -20,12 +19,11 @@ export const verifyJWTTenant = async (
       `${AUTH_SERVICE_URL}/verify-admin-token`,
       { token }
     );
-
-    if (authResponse.status !== 200 || !authResponse.data?.data?.user) {
+    if (authResponse.status !== 200 || !authResponse.data?.user) {
       return res.status(401).send({ message: "Invalid token" });
     }
 
-    const user = authResponse.data.data.user;
+    const user = authResponse.data.user;
 
     req.body.user = user;
     next();

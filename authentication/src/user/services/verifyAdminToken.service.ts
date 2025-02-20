@@ -27,7 +27,6 @@ export const verifyAdminTokenService = async (token: string) => {
     if (!user) {
       return new UnauthorizedResponse("Invalid token").generate();
     }
-
     return {
       data: {
         user,
