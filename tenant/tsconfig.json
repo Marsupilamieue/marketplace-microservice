@@ -13,6 +13,7 @@
       "@src/*": ["./src/*"],
       "@db/*": ["./db/*"],
       "@type/*": ["./type/*"]
-    }
+    },
+    "types": ["node", "express"]
   }
 }

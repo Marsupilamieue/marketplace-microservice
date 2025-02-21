@@ -3,7 +3,7 @@ import {
   NotFoundResponse,
 } from "./commons/patterns/";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 import { getUserByUsername } from "./user/dao/getUserByUsername.dao";
 import { NewUser, User } from "../db/schema/users";

@@ -14,7 +14,6 @@ export const verifyJWTTenant = async (
     }
     const AUTH_SERVICE_URL =
       process.env.AUTH_SERVICE_URL || "http://auth-service:3000";
-
     const authResponse = await axios.post(
       `${AUTH_SERVICE_URL}/verify-admin-token`,
       { token }

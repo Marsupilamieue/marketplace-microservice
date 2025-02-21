@@ -5,6 +5,7 @@ export const getAllCartItemsHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
+  console.log(req);
   if (!req.body.user?.id) {
     return res.status(401).json({ message: "Unauthorized" });
   }

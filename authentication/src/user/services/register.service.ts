@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { NewUser } from "../../../db/schema/users";
 import { insertNewUser } from "../dao/insertNewUser.dao";
 import { InternalServerErrorResponse } from "../../commons/patterns";
@@ -12,8 +12,8 @@ export const registerService = async (
   phone_number: string
 ) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     if (!process.env.TENANT_ID) {
       return new InternalServerErrorResponse(

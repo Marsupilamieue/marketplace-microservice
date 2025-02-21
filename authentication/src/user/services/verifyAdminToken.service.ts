@@ -7,11 +7,12 @@ import { getUserById } from "../dao/getUserById.dao";
 
 export const verifyAdminTokenService = async (token: string) => {
   try {
+    console.log("sebelum verify");
     const payload = jwt.verify(
       token,
       process.env.ADMIN_JWT_SECRET as string
     ) as JwtPayload;
-
+    console.log("habis verify");
     const { id, tenant_id } = payload;
     const SERVER_TENANT_ID = process.env.ADMIN_TENANT_ID;
     if (!SERVER_TENANT_ID) {
@@ -34,6 +35,7 @@ export const verifyAdminTokenService = async (token: string) => {
       status: 200,
     };
   } catch (err: any) {
+    console.log(err);
     return new UnauthorizedResponse("Invalid token").generate();
   }
 };
