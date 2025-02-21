@@ -1,0 +1,998 @@
+{
+	"info": {
+		"_postman_id": "49c5f1cc-b631-4742-91c4-21bed7041dec",
+		"name": "Marketplace",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32312240"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"Marsupilamieue1\",\n    \"password\":\"Password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/auth/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"Marsupilamieue1\",\n    \"email\": \"zhafir531@gmail.com\",\n    \"password\":\"Password1\",\n    \"full_name\":\"mars\",\n    \"address\":\"temanggung\",\n    \"phone_number\": \"03201380123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/auth/register",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get Cart Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyNDE5MywiZXhwIjoxNzQwMjEwNTkzfQ.54iw4lKs5gilgeBCW7X9Fu5dpWVsERqt62_874uvmuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/cart/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item to Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyNDE5MywiZXhwIjoxNzQwMjEwNTkzfQ.54iw4lKs5gilgeBCW7X9Fu5dpWVsERqt62_874uvmuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": \"469bf3ec-3b76-474d-80e3-dee004eaa10b\",\n    \"quantity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderUrl}}/cart/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Cart Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NDAyYzU5LTM5ODUtNDcyYS05N2NjLTNiMjM2N2ExMmQ2ZiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTczOTc5NTQxNSwiZXhwIjoxNzM5ODgxODE1fQ.wYdQ98_MBl_wjm-8cZDMEYR5AZZM-EbYnYbp6u1YloU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\": \"01583bb6-834c-4da3-9aaf-fe798983f8cb\",\n    \"quantity\": 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderUrl}}/cart/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/cart/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tenant",
+			"item": [
+				{
+					"name": "Get Tenant By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5YTVmMmQ2LWFhOTYtNDY2NS1iYmViLTg4OGQwOGJlMjA2NiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjA0MiwiZXhwIjoxNzQwMjA4NDQyfQ._TZmYfVBmIxjhhaLfPvpmyILb7n9rtBN9oUVw9_U8FE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{tenantUrl}}/tenant/:tenantId",
+							"host": [
+								"{{tenantUrl}}"
+							],
+							"path": [
+								"tenant",
+								":tenantId"
+							],
+							"variable": [
+								{
+									"key": "tenantId",
+									"value": "2d19ceab-e22a-427c-80e1-b004013b090f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tenant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5YTVmMmQ2LWFhOTYtNDY2NS1iYmViLTg4OGQwOGJlMjA2NiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjA0MiwiZXhwIjoxNzQwMjA4NDQyfQ._TZmYfVBmIxjhhaLfPvpmyILb7n9rtBN9oUVw9_U8FE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Toko All In 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{tenantUrl}}/tenant/",
+							"host": [
+								"{{tenantUrl}}"
+							],
+							"path": [
+								"tenant",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Tenant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{tenantUrl}}/tenant/:tenantId",
+							"host": [
+								"{{tenantUrl}}"
+							],
+							"path": [
+								"tenant",
+								":tenantId"
+							],
+							"variable": [
+								{
+									"key": "tenantId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tenant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{tenantUrl}}/tenant/",
+							"host": [
+								"{{tenantUrl}}"
+							],
+							"path": [
+								"tenant",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get All Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyNDE5MywiZXhwIjoxNzQwMjEwNTkzfQ.54iw4lKs5gilgeBCW7X9Fu5dpWVsERqt62_874uvmuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/order/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Order By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/order/:orderId",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"order",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyNDE5MywiZXhwIjoxNzQwMjEwNTkzfQ.54iw4lKs5gilgeBCW7X9Fu5dpWVsERqt62_874uvmuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shipping_provider\": \"JNE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderUrl}}/order/",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyNDE5MywiZXhwIjoxNzQwMjEwNTkzfQ.54iw4lKs5gilgeBCW7X9Fu5dpWVsERqt62_874uvmuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"payment_method\": \"COD\", \n    \"payment_reference\": \"deafult.png\", \n    \"amount\": 8000050 \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderUrl}}/order/:orderId/pay",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"order",
+								":orderId",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "42416a4a-9748-4767-b0b7-c26ebd4efa0b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/order/:orderId/cancel",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"order",
+								":orderId",
+								"cancel"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4NGQ4YTgyLWY5Y2EtNDBhZC04ZTU2LWNjZjdjNjlkMDdjYyIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDA4MzY0MywiZXhwIjoxNzQwMTcwMDQzfQ.f2FOVcywSi0kz0iKitGL_dKFO1IUuvV0YjJY7cHeGYY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjY2OSwiZXhwIjoxNzQwMjA5MDY5fQ.5wWpVPm7NbuhTFK1Im-dspe6DNf6az3y5yG3WhzLF-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/category",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": "31f01a0d-13e2-4834-ba8e-f3a63ca34d81"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/category/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"category",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Many Product By Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/many",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YzUyMDRlLTZhZjAtNDU1NS04MTJjLWE3NDRiYjBmOTlhZSIsInRlbmFudF9pZCI6IjNmNmE1YzFiLTZlMDYtNDU2MC1iYzEyLTQzMzE3MDgxYTNkYSIsImlhdCI6MTc0MDEyMjQwNCwiZXhwIjoxNzQwMjA4ODA0fQ.xZeeKKaRNrBsjcffzE5ZxJHrcawlNG3E_7q4_j_6RKU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Iphone 20\",\n    \"description\": \"Hp bagus tapi overprice 3\",\n    \"price\": 800005,\n    \"quantity_available\": 900,\n    \"category_id\": \"54833864-76e4-43c2-b188-1d9e013b7665\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productUrl}}/product/",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5YTVmMmQ2LWFhOTYtNDY2NS1iYmViLTg4OGQwOGJlMjA2NiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjA0MiwiZXhwIjoxNzQwMjA4NDQyfQ._TZmYfVBmIxjhhaLfPvpmyILb7n9rtBN9oUVw9_U8FE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hape\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productUrl}}/product/category",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/category/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"category",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/product/category/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"product",
+								"category",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "Get All Wishlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjY2OSwiZXhwIjoxNzQwMjA5MDY5fQ.5wWpVPm7NbuhTFK1Im-dspe6DNf6az3y5yG3WhzLF-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wishlist By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/:Id",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Wishlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjY2OSwiZXhwIjoxNzQwMjA5MDY5fQ.5wWpVPm7NbuhTFK1Im-dspe6DNf6az3y5yG3WhzLF-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wishlist 2025\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product to Wishlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjY2OSwiZXhwIjoxNzQwMjA5MDY5fQ.5wWpVPm7NbuhTFK1Im-dspe6DNf6az3y5yG3WhzLF-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"wishlist_id\":\"f98e3529-63f3-465d-aca5-80813e578648\",\n    \"product_id\": \"469bf3ec-3b76-474d-80e3-dee004eaa10b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/add",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Wishlist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/:Id",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Product From Wishlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/remove",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Wishlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{wishlistUrl}}/wishlist/:Id",
+							"host": [
+								"{{wishlistUrl}}"
+							],
+							"path": [
+								"wishlist",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "productDocker",
+			"value": "/localhost:8003"
+		},
+		{
+			"key": "orderUrl",
+			"value": "http://localhost:8002"
+		},
+		{
+			"key": "authUrl",
+			"value": "http://localhost:8001"
+		},
+		{
+			"key": "wishlistUrl",
+			"value": "http://localhost:8005"
+		},
+		{
+			"key": "tenantUrl",
+			"value": "http://localhost:8004"
+		},
+		{
+			"key": "productUrl",
+			"value": "http://localhost:8003"
+		}
+	]
+}
