@@ -1,10 +1,11 @@
+import { User } from "../../../types";
 import {
   InternalServerErrorResponse,
   NotFoundResponse,
 } from "../../commons/patterns";
 import { getAllUserWishlist } from "../dao/getAllUserWishlist.dao";
 
-export const getAllUserWishlistService = async (user_id: string) => {
+export const getAllUserWishlistService = async (user: User) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
     if (!SERVER_TENANT_ID) {
@@ -13,11 +14,11 @@ export const getAllUserWishlistService = async (user_id: string) => {
       ).generate();
     }
 
-    if (!user_id) {
+    if (!user.id) {
       return new NotFoundResponse("User ID is missing").generate();
     }
 
-    const wishlists = await getAllUserWishlist(SERVER_TENANT_ID, user_id);
+    const wishlists = await getAllUserWishlist(SERVER_TENANT_ID, user.id);
 
     return {
       data: wishlists,

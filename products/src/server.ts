@@ -8,21 +8,15 @@ import express_prom_bundle from "express-prom-bundle";
 
 import productRoutes from "./product/product.routes";
 
-const app: Express = express();
-
 // Prometheus metrics middleware
 const metricsMiddleware = express_prom_bundle({
   includeMethod: true,
   includePath: true,
   includeStatusCode: true,
   includeUp: true,
-  customLabels: { project_name: "marketplace-monolith" },
-  promClient: {
-    collectDefaultMetrics: {},
-  },
 });
 
-// Middleware
+const app = express();
 app.use(metricsMiddleware);
 app.use(cors());
 app.use(express.json());
@@ -30,23 +24,11 @@ app.use(express.json());
 // Routes
 app.use("/product", productRoutes);
 
-// Health check endpoint
-app.get("/health", (_, res) => {
-  res.status(200).json({ status: "healthy" });
+app.get("/", (_, res) => {
+  res.status(200).send("Products Microservice is running!");
 });
 
-app.use((req: Request, res: Response) => {
-  res.status(404).json({
-    message: "Not Found",
-    path: req.path,
-  });
-});
-
-const PORT = process.env.PORT || 8000;
-
+const PORT = process.env.PORT || 8002;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`🚀 Products Microservice has started on port ${PORT}`);
 });
-
-export default app;

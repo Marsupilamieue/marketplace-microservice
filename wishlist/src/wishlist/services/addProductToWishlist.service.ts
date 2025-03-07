@@ -1,4 +1,5 @@
 import { NewWishlistDetail } from "../../../db/schema/wishlistDetail";
+import { User } from "../../../types";
 import { InternalServerErrorResponse } from "../../commons/patterns";
 import { addProductToWishlist } from "../dao/addProductToWishlist.dao";
 import { getWishlistById } from "../dao/getWishlistById.dao";
@@ -6,7 +7,7 @@ import { getWishlistById } from "../dao/getWishlistById.dao";
 export const addProductToWishlistService = async (
   wishlist_id: string,
   product_id: string,
-  user_id: string
+  user: User
 ) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
@@ -16,7 +17,7 @@ export const addProductToWishlistService = async (
       ).generate();
     }
 
-    if (!user_id) {
+    if (!user.id) {
       return new InternalServerErrorResponse("User ID is missing").generate();
     }
 
@@ -25,7 +26,7 @@ export const addProductToWishlistService = async (
       return new InternalServerErrorResponse("Wishlist not found").generate();
     }
 
-    if (wishlist.user_id !== user_id) {
+    if (wishlist.user_id !== user.id) {
       return new InternalServerErrorResponse(
         "User is not authorized to add product to this wishlist"
       ).generate();

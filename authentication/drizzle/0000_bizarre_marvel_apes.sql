@@ -9,5 +9,6 @@ CREATE TABLE "users" (
 	"phone_number" varchar(256),
 	"created_at" timestamp with time zone DEFAULT now(),
 	"updated_at" timestamp with time zone DEFAULT now(),
+	CONSTRAINT "users_tenant_id_username_email_pk" PRIMARY KEY("tenant_id","username","email"),
 	CONSTRAINT "users_id_unique" UNIQUE("id")
 );

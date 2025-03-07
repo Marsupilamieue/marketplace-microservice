@@ -1,5 +1,5 @@
 {
-  "id": "2f0c385f-26dc-485d-8857-253355b9b4f8",
+  "id": "c658f02f-fb63-407e-9242-d77944551616",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -75,7 +75,16 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "users_tenant_id_username_email_pk": {
+          "name": "users_tenant_id_username_email_pk",
+          "columns": [
+            "tenant_id",
+            "username",
+            "email"
+          ]
+        }
+      },
       "uniqueConstraints": {
         "users_id_unique": {
           "name": "users_id_unique",

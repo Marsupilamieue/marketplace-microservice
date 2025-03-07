@@ -22,18 +22,22 @@ export const verifyTokenService = async (token: string) => {
     if (tenant_id !== SERVER_TENANT_ID) {
       return new UnauthorizedResponse("Invalid token").generate();
     }
+    try {
+      const user = await getUserById(id, SERVER_TENANT_ID);
+      if (!user) {
+        return new UnauthorizedResponse("Invalid token").generate();
+      }
 
-    const user = await getUserById(id, SERVER_TENANT_ID);
-    if (!user) {
-      return new UnauthorizedResponse("Invalid token").generate();
+      return {
+        data: {
+          user,
+        },
+        status: 200,
+      };
+    } catch (dbError) {
+      console.error("[ERROR] Database connection failed:", dbError);
+      return new InternalServerErrorResponse("Database error").generate();
     }
-
-    return {
-      data: {
-        user,
-      },
-      status: 200,
-    };
   } catch (err: any) {
     return new UnauthorizedResponse("Invalid token").generate();
   }

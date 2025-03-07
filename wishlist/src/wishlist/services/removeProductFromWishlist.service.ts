@@ -2,11 +2,11 @@ import { InternalServerErrorResponse } from "../../commons/patterns";
 import { getWishlistDetailById } from "../dao/getWishlistDetailById.dao";
 import { getWishlistById } from "../dao/getWishlistById.dao";
 import { removeProductFromWishlist } from "../dao/removeProductFromWishlist.dao";
-import { User } from "../../commons/types";
+import { User } from "../../../types";
 
 export const removeProductFromWishlistService = async (
   id: string,
-  user_id: string
+  user: User
 ) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
@@ -16,7 +16,7 @@ export const removeProductFromWishlistService = async (
       ).generate();
     }
 
-    if (!user_id) {
+    if (!user.id) {
       return new InternalServerErrorResponse("User ID is missing").generate();
     }
 
@@ -35,7 +35,7 @@ export const removeProductFromWishlistService = async (
       return new InternalServerErrorResponse("Wishlist not found").generate();
     }
 
-    if (wishlist.user_id !== user_id) {
+    if (wishlist.user_id !== user.id) {
       return new InternalServerErrorResponse(
         "User is not authorized to remove product from this wishlist"
       ).generate();

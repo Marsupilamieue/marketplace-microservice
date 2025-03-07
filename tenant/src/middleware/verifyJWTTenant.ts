@@ -13,7 +13,7 @@ export const verifyJWTTenant = async (
       return res.status(401).send({ message: "Invalid token" });
     }
     const AUTH_SERVICE_URL =
-      process.env.AUTH_SERVICE_URL || "http://auth-service:3000";
+      process.env.AUTH_SERVICE_URL || "http://auth-service:8000";
     const authResponse = await axios.post(
       `${AUTH_SERVICE_URL}/verify-admin-token`,
       { token }

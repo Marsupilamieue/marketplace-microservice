@@ -5,8 +5,9 @@ import {
 } from "../../commons/patterns";
 import { getOrderById } from "../dao/getOrderById.dao";
 import { cancelOrder } from "../dao/cancelOrder.dao";
+import { User } from "../../../types/user";
 
-export const cancelOrderService = async (user_id: string, order_id: string) => {
+export const cancelOrderService = async (user: User, order_id: string) => {
   try {
     const SERVER_TENANT_ID = process.env.TENANT_ID;
     if (!SERVER_TENANT_ID) {
@@ -15,13 +16,13 @@ export const cancelOrderService = async (user_id: string, order_id: string) => {
       ).generate();
     }
 
-    if (!user_id) {
+    if (!user.id) {
       return new NotFoundResponse("User id not found").generate();
     }
 
-    const order = await getOrderById(SERVER_TENANT_ID, user_id, order_id);
+    const order = await getOrderById(SERVER_TENANT_ID, user.id, order_id);
 
-    if (order.user_id !== user_id) {
+    if (order.user_id !== user.id) {
       return new UnauthorizedResponse(
         "User not authorized to cancel this order"
       ).generate();
@@ -31,7 +32,7 @@ export const cancelOrderService = async (user_id: string, order_id: string) => {
       return new UnauthorizedResponse("Order already cancelled").generate();
     }
 
-    await cancelOrder(SERVER_TENANT_ID, user_id, order_id);
+    await cancelOrder(SERVER_TENANT_ID, user.id, order_id);
     order.order_status = "CANCELLED";
 
     return {

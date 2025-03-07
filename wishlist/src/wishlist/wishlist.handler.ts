@@ -5,12 +5,8 @@ export const getAllUserWishlistHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  if (!req.body.user?.id) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const user_id: string = req.body.user.id;
-  const response = await Service.getAllUserWishlistService(user_id);
+  const { user } = req.body;
+  const response = await Service.getAllUserWishlistService(user);
   return res.status(response.status).send(response.data);
 };
 
@@ -18,13 +14,9 @@ export const getWishlistByIdHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  if (!req.body.user?.id) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const user_id: string = req.body.user.id;
+  const { user } = req.body;
   const { id } = req.params;
-  const response = await Service.getWishlistByIdService(id, user_id);
+  const response = await Service.getWishlistByIdService(id, user);
   return res.status(response.status).send(response.data);
 };
 
@@ -32,13 +24,8 @@ export const createWishlistHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  if (!req.body.user?.id) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const user_id: string = req.body.user.id;
-  const { name } = req.body;
-  const response = await Service.createWishlistService(user_id, name);
+  const { user, name } = req.body;
+  const response = await Service.createWishlistService(user, name);
   return res.status(response.status).send(response.data);
 };
 
@@ -65,16 +52,11 @@ export const addProductToWishlistHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  if (!req.body.user?.id) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const user_id: string = req.body.user.id;
-  const { wishlist_id, product_id } = req.body;
+  const { user, wishlist_id, product_id } = req.body;
   const response = await Service.addProductToWishlistService(
     wishlist_id,
     product_id,
-    user_id
+    user
   );
   return res.status(response.status).send(response.data);
 };
@@ -83,12 +65,7 @@ export const removeProductFromWishlistHandler = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  if (!req.body.user?.id) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const user_id: string = req.body.user.id;
-  const { id } = req.body;
-  const response = await Service.removeProductFromWishlistService(id, user_id);
+  const { user, id } = req.body;
+  const response = await Service.removeProductFromWishlistService(id, user);
   return res.status(response.status).send(response.data);
 };

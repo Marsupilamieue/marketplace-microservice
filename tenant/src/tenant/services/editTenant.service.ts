@@ -5,11 +5,11 @@ import {
 } from "../../commons/patterns";
 import { editTenantById } from "../dao/editTenantById.dao";
 import { getTenantById } from "../dao/getTenantById.dao";
-import { User } from "../../commons/types";
+import { User } from "../../../types";
 
 export const editTenantService = async (
   old_tenant_id: string,
-  user_id: string,
+  user: User,
   tenant_id?: string,
   owner_id?: string,
   name?: string
@@ -20,7 +20,7 @@ export const editTenantService = async (
       return new NotFoundResponse("Tenant not found").generate();
     }
 
-    if (tenant_information.tenants.owner_id !== user_id) {
+    if (tenant_information.tenants.owner_id !== user.id) {
       return new UnauthorizedResponse(
         "You are not allowed to edit this tenant"
       ).generate();

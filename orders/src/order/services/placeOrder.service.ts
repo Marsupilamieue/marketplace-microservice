@@ -1,3 +1,4 @@
+import { User } from "../../../types/user";
 import { getAllCartItems } from "../../cart/dao/getAllCartItems.dao";
 import {
   BadRequestResponse,
@@ -8,7 +9,7 @@ import { createOrder } from "../dao/createOrder.dao";
 import axios from "axios";
 
 export const placeOrderService = async (
-  user_id: string,
+  user: User,
   shipping_provider: string
 ) => {
   try {
@@ -27,12 +28,12 @@ export const placeOrderService = async (
       return new NotFoundResponse("Shipping provider not found").generate();
     }
 
-    if (!user_id) {
+    if (!user.id) {
       return new InternalServerErrorResponse("User id not found").generate();
     }
 
     // get the cart items
-    const cartItems = await getAllCartItems(SERVER_TENANT_ID, user_id);
+    const cartItems = await getAllCartItems(SERVER_TENANT_ID, user.id);
 
     // get the product datas
     const productIds = cartItems.map((item) => item.product_id);
@@ -52,7 +53,7 @@ export const placeOrderService = async (
     // create order
     const order = await createOrder(
       SERVER_TENANT_ID,
-      user_id,
+      user.id,
       cartItems,
       products.data,
       shipping_provider as
