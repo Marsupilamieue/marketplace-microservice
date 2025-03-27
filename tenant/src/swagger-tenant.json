@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace-Tenant",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8004"
+    }
+  ],
+  "paths": {
+    "/tenant/{tenantId}": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Get Tenant By Id",
+        "description": "Get Tenant By Id",
+        "operationId": "getTenantById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Edit Tenant",
+        "description": "Edit Tenant",
+        "operationId": "editTenant",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "tenantId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/tenant/": {
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Create Tenant",
+        "description": "Create Tenant",
+        "operationId": "createTenant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Toko All In 2"
+                  }
+                }
+              },
+              "examples": {
+                "Create Tenant": {
+                  "value": {
+                    "name": "Toko All In 2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Delete Tenant",
+        "description": "Delete Tenant",
+        "operationId": "deleteTenant",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tenant"
+    }
+  ]
+}

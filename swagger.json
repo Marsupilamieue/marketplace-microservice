@@ -1,0 +1,1305 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001"
+    },
+    {
+      "url": "http://localhost:8002"
+    },
+    {
+      "url": "http://localhost:8004"
+    },
+    {
+      "url": "http://localhost:8003"
+    },
+    {
+      "url": "http://localhost:8005"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "description": "Login",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "example": "Password1"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "Marsupilamieue1"
+                  }
+                }
+              },
+              "examples": {
+                "Login": {
+                  "value": {
+                    "password": "Password1",
+                    "username": "Marsupilamieue1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register",
+        "description": "Register",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "temanggung"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "zhafir531@gmail.com"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "example": "mars"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Password1"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": "03201380123"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "Marsupilamieue1"
+                  }
+                }
+              },
+              "examples": {
+                "Register": {
+                  "value": {
+                    "address": "temanggung",
+                    "email": "zhafir531@gmail.com",
+                    "full_name": "mars",
+                    "password": "Password1",
+                    "phone_number": "03201380123",
+                    "username": "Marsupilamieue1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/cart/": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get Cart Item",
+        "description": "Get Cart Item",
+        "operationId": "getCartItem",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Edit Cart Item",
+        "description": "Edit Cart Item",
+        "operationId": "editCartItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cart_id": {
+                    "type": "string",
+                    "example": "01583bb6-834c-4da3-9aaf-fe798983f8cb"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "example": 9
+                  }
+                }
+              },
+              "examples": {
+                "Edit Cart Item": {
+                  "value": {
+                    "cart_id": "01583bb6-834c-4da3-9aaf-fe798983f8cb",
+                    "quantity": 9
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Add Item to Cart",
+        "description": "Add Item to Cart",
+        "operationId": "addItemToCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "example": "469bf3ec-3b76-474d-80e3-dee004eaa10b"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "example": 10
+                  }
+                }
+              },
+              "examples": {
+                "Add Item to Cart": {
+                  "value": {
+                    "product_id": "469bf3ec-3b76-474d-80e3-dee004eaa10b",
+                    "quantity": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Delete Cart Item",
+        "description": "Delete Cart Item",
+        "operationId": "deleteCartItem",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/tenant/{tenantId}": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Get Tenant By Id",
+        "description": "Get Tenant By Id",
+        "operationId": "getTenantById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Edit Tenant",
+        "description": "Edit Tenant",
+        "operationId": "editTenant",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "tenantId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/tenant/": {
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Create Tenant",
+        "description": "Create Tenant",
+        "operationId": "createTenant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Toko All In 2"
+                  }
+                }
+              },
+              "examples": {
+                "Create Tenant": {
+                  "value": {
+                    "name": "Toko All In 2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Delete Tenant",
+        "description": "Delete Tenant",
+        "operationId": "deleteTenant",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/order/": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get All Order",
+        "description": "Get All Order",
+        "operationId": "getAllOrder",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Create Order",
+        "description": "Create Order",
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipping_provider": {
+                    "type": "string",
+                    "example": "JNE"
+                  }
+                }
+              },
+              "examples": {
+                "Create Order": {
+                  "value": {
+                    "shipping_provider": "JNE"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/{orderId}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get All Order By Id",
+        "description": "Get All Order By Id",
+        "operationId": "getAllOrderById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/order/{orderId}/pay": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Pay Order",
+        "description": "Pay Order",
+        "operationId": "payOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": 8000050
+                  },
+                  "payment_method": {
+                    "type": "string",
+                    "example": "COD"
+                  },
+                  "payment_reference": {
+                    "type": "string",
+                    "example": "deafult.png"
+                  }
+                }
+              },
+              "examples": {
+                "Pay Order": {
+                  "value": {
+                    "amount": 8000050,
+                    "payment_method": "COD",
+                    "payment_reference": "deafult.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "42416a4a-9748-4767-b0b7-c26ebd4efa0b"
+          }
+        }
+      ]
+    },
+    "/order/{orderId}/cancel": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Cancel Order",
+        "description": "Cancel Order",
+        "operationId": "cancelOrder",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/product/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get All Product",
+        "description": "Get All Product",
+        "operationId": "getAllProduct",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Create Product",
+        "description": "Create Product",
+        "operationId": "createProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "string",
+                    "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Hp bagus tapi overprice 3"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Iphone 20"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 800005
+                  },
+                  "quantity_available": {
+                    "type": "number",
+                    "example": 900
+                  }
+                }
+              },
+              "examples": {
+                "Create Product": {
+                  "value": {
+                    "category_id": "54833864-76e4-43c2-b188-1d9e013b7665",
+                    "description": "Hp bagus tapi overprice 3",
+                    "name": "Iphone 20",
+                    "price": 800005,
+                    "quantity_available": 900
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/product/category": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get All Category",
+        "description": "Get All Category",
+        "operationId": "getAllCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Create Category",
+        "description": "Create Category",
+        "operationId": "createCategory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Hape"
+                  }
+                }
+              },
+              "examples": {
+                "Create Category": {
+                  "value": {
+                    "name": "Hape"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/product/{Id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product By Id",
+        "description": "Get Product By Id",
+        "operationId": "getProductById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Edit Product",
+        "description": "Edit Product",
+        "operationId": "editProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Samung"
+                  }
+                }
+              },
+              "examples": {
+                "Edit Product": {
+                  "value": {
+                    "name": "Samung"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Delete Product",
+        "description": "Delete Product",
+        "operationId": "deleteProduct",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/product/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product By Category",
+        "description": "Get Product By Category",
+        "operationId": "getProductByCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Edit Category",
+        "description": "Edit Category",
+        "operationId": "editCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Delete Category",
+        "description": "Delete Category",
+        "operationId": "deleteCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "categoryId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/product/many": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Many Product By Id",
+        "description": "Get Many Product By Id",
+        "operationId": "getManyProductById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/products/": {
+      "get": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Get All Product",
+        "description": "Get All Product",
+        "operationId": "getAllProduct1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Create Product",
+        "description": "Create Product",
+        "operationId": "createProduct1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "string",
+                    "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Hp bagus tapi overprice 3"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Iphone 20"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 800005
+                  },
+                  "quantity_available": {
+                    "type": "number",
+                    "example": 900
+                  }
+                }
+              },
+              "examples": {
+                "Create Product": {
+                  "value": {
+                    "category_id": "54833864-76e4-43c2-b188-1d9e013b7665",
+                    "description": "Hp bagus tapi overprice 3",
+                    "name": "Iphone 20",
+                    "price": 800005,
+                    "quantity_available": 900
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/products/categories": {
+      "get": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Get All Category",
+        "description": "Get All Category",
+        "operationId": "getAllCategory1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Create Category",
+        "description": "Create Category",
+        "operationId": "createCategory1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Hape"
+                  }
+                }
+              },
+              "examples": {
+                "Create Category": {
+                  "value": {
+                    "name": "Hape"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/products/{Id}": {
+      "get": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Get Product By Id",
+        "description": "Get Product By Id",
+        "operationId": "getProductById1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Edit Product",
+        "description": "Edit Product",
+        "operationId": "editProduct1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Samung"
+                  }
+                }
+              },
+              "examples": {
+                "Edit Product": {
+                  "value": {
+                    "name": "Samung"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Delete Product",
+        "description": "Delete Product",
+        "operationId": "deleteProduct1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/v2/products/categories/{categoryId}": {
+      "get": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Get Product By Category",
+        "description": "Get Product By Category",
+        "operationId": "getProductByCategory1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Edit Category",
+        "description": "Edit Category",
+        "operationId": "editCategory1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Delete Category",
+        "description": "Delete Category",
+        "operationId": "deleteCategory1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "categoryId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/v2/products/bulk": {
+      "post": {
+        "tags": [
+          "Product V2"
+        ],
+        "summary": "Get Many Product By Id",
+        "description": "Get Many Product By Id",
+        "operationId": "getManyProductById1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/wishlist/": {
+      "get": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get All Wishlist",
+        "description": "Get All Wishlist",
+        "operationId": "getAllWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Create Wishlist",
+        "description": "Create Wishlist",
+        "operationId": "createWishlist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Wishlist 2025"
+                  }
+                }
+              },
+              "examples": {
+                "Create Wishlist": {
+                  "value": {
+                    "name": "Wishlist 2025"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/wishlist/{Id}": {
+      "get": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get Wishlist By Id",
+        "description": "Get Wishlist By Id",
+        "operationId": "getWishlistById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Update Wishlist",
+        "description": "Update Wishlist",
+        "operationId": "updateWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Delete Wishlist",
+        "description": "Delete Wishlist",
+        "operationId": "deleteWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/wishlist/add": {
+      "post": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Add Product to Wishlist",
+        "description": "Add Product to Wishlist",
+        "operationId": "addProductToWishlist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "example": "469bf3ec-3b76-474d-80e3-dee004eaa10b"
+                  },
+                  "wishlist_id": {
+                    "type": "string",
+                    "example": "f98e3529-63f3-465d-aca5-80813e578648"
+                  }
+                }
+              },
+              "examples": {
+                "Add Product to Wishlist": {
+                  "value": {
+                    "product_id": "469bf3ec-3b76-474d-80e3-dee004eaa10b",
+                    "wishlist_id": "f98e3529-63f3-465d-aca5-80813e578648"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/wishlist/remove": {
+      "delete": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Remove Product From Wishlist",
+        "description": "Remove Product From Wishlist",
+        "operationId": "removeProductFromWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Cart"
+    },
+    {
+      "name": "Tenant"
+    },
+    {
+      "name": "Order"
+    },
+    {
+      "name": "Product"
+    },
+    {
+      "name": "Product V2"
+    },
+    {
+      "name": "Wishlist"
+    }
+  ]
+}

@@ -572,7 +572,7 @@
 							"variable": [
 								{
 									"key": "categoryId",
-									"value": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+									"value": ""
 								}
 							]
 						}
@@ -674,8 +674,27 @@
 				{
 					"name": "Edit Product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU2Y2FkYWM4LTg0ODAtNGFlYy1hODc4LThlNTQ0YzBjN2UyZiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MzAwNTg4NSwiZXhwIjoxNzQzMDkyMjg1fQ.ghmwoEVh72hveErn-YnfluWHj49MyqjocDHAe7LXdNw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Samung\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{productUrl}}/product/:Id",
 							"host": [
@@ -688,7 +707,7 @@
 							"variable": [
 								{
 									"key": "Id",
-									"value": ""
+									"value": "c7d21e63-5137-4754-884e-ebd2910436d3"
 								}
 							]
 						}
@@ -757,6 +776,336 @@
 							"path": [
 								"product",
 								"category",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product V2",
+			"item": [
+				{
+					"name": "Get All Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4NGQ4YTgyLWY5Y2EtNDBhZC04ZTU2LWNjZjdjNjlkMDdjYyIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDA4MzY0MywiZXhwIjoxNzQwMTcwMDQzfQ.f2FOVcywSi0kz0iKitGL_dKFO1IUuvV0YjJY7cHeGYY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllNDI1Y2I1LWM5ZjEtNGE5OS1iNGFiLWMwZThhZDAzNDRhOCIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjY2OSwiZXhwIjoxNzQwMjA5MDY5fQ.5wWpVPm7NbuhTFK1Im-dspe6DNf6az3y5yG3WhzLF-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/categories",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": "31f01a0d-13e2-4834-ba8e-f3a63ca34d81"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/categories/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Many Product By Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/bulk",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YzUyMDRlLTZhZjAtNDU1NS04MTJjLWE3NDRiYjBmOTlhZSIsInRlbmFudF9pZCI6IjNmNmE1YzFiLTZlMDYtNDU2MC1iYzEyLTQzMzE3MDgxYTNkYSIsImlhdCI6MTc0MDEyMjQwNCwiZXhwIjoxNzQwMjA4ODA0fQ.xZeeKKaRNrBsjcffzE5ZxJHrcawlNG3E_7q4_j_6RKU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Iphone 20\",\n    \"description\": \"Hp bagus tapi overprice 3\",\n    \"price\": 800005,\n    \"quantity_available\": 900,\n    \"category_id\": \"54833864-76e4-43c2-b188-1d9e013b7665\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productUrl}}/v2/products/",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5YTVmMmQ2LWFhOTYtNDY2NS1iYmViLTg4OGQwOGJlMjA2NiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MDEyMjA0MiwiZXhwIjoxNzQwMjA4NDQyfQ._TZmYfVBmIxjhhaLfPvpmyILb7n9rtBN9oUVw9_U8FE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hape\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productUrl}}/v2/products/categories",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU2Y2FkYWM4LTg0ODAtNGFlYy1hODc4LThlNTQ0YzBjN2UyZiIsInRlbmFudF9pZCI6IjQ3ZGQ2YjI0LTBiMjMtNDZiMC1hNjYyLTc3NjE1OGQwODliYSIsImlhdCI6MTc0MzAwNTg4NSwiZXhwIjoxNzQzMDkyMjg1fQ.ghmwoEVh72hveErn-YnfluWHj49MyqjocDHAe7LXdNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Samung\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productUrl}}/v2/products/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": "c7d21e63-5137-4754-884e-ebd2910436d3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/categories/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/:Id",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								":Id"
+							],
+							"variable": [
+								{
+									"key": "Id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productUrl}}/v2/products/categories/:categoryId",
+							"host": [
+								"{{productUrl}}"
+							],
+							"path": [
+								"v2",
+								"products",
+								"categories",
 								":categoryId"
 							],
 							"variable": [

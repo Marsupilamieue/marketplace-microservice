@@ -17,6 +17,15 @@ export const editCategoryService = async (
       name,
     });
 
+    if (!category) {
+      return {
+        data: {
+          error: `Category with id '${category_id}' not found`,
+        },
+        status: 404,
+      };
+    }
+
     return {
       data: category,
       status: 200,

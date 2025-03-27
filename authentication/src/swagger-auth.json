@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace-Auth",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "description": "Login",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "example": "Password1"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "Marsupilamieue1"
+                  }
+                }
+              },
+              "examples": {
+                "Login": {
+                  "value": {
+                    "password": "Password1",
+                    "username": "Marsupilamieue1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register",
+        "description": "Register",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "temanggung"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "zhafir531@gmail.com"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "example": "mars"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Password1"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": "03201380123"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "Marsupilamieue1"
+                  }
+                }
+              },
+              "examples": {
+                "Register": {
+                  "value": {
+                    "address": "temanggung",
+                    "email": "zhafir531@gmail.com",
+                    "full_name": "mars",
+                    "password": "Password1",
+                    "phone_number": "03201380123",
+                    "username": "Marsupilamieue1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    }
+  ]
+}

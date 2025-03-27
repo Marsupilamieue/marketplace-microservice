@@ -8,6 +8,10 @@ import express_prom_bundle from "express-prom-bundle";
 
 import productRoutes from "./product/product.routes";
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from "./swagger-product.json";
+
+
 // Prometheus metrics middleware
 const metricsMiddleware = express_prom_bundle({
   includeMethod: true,
@@ -22,7 +26,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/product", productRoutes);
+app.use("/v2/products", productRoutes);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (_, res) => {
   res.status(200).send("Products Microservice is running!");

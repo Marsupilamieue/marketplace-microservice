@@ -25,6 +25,15 @@ export const editProductService = async (
       category_id,
     });
 
+    if (!product) {
+      return {
+        data: {
+          error: `Product with id '${id}' not found`,
+        },
+        status: 404,
+      };
+    }
+
     return {
       data: product,
       status: 200,

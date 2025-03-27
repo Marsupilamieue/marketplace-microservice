@@ -12,6 +12,13 @@ export const getProductByIdService = async (id: string) => {
 
     const products = await getProductById(SERVER_TENANT_ID, id);
 
+    if (!products) {
+      return {
+        error: `Product with id '${id}' not found`,
+        status: 404,
+      };
+    }
+
     return {
       data: {
         ...products,

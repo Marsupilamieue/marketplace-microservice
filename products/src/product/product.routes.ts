@@ -5,20 +5,29 @@ import * as Handler from "./product.handler";
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /v2/products:
+ *   get:
+ *     summary: Get all products
+ *     responses:
+ *       200:
+ *         description: Success
+ */
 router.get("", Handler.getAllProductsHandler);
-router.get("/category", Handler.getAllCategoryHandler);
+router.get("/categories", Handler.getAllCategoryHandler);
 router.get(
   "/:id",
   validate(Validation.getProductByIdSchema),
   Handler.getProductByIdHandler
 );
 router.post(
-  "/many",
+  "/bulk",
   validate(Validation.getManyProductDatasByIdSchema),
   Handler.getManyProductDatasByIdHandler
 );
 router.get(
-  "/category/:category_id",
+  "/categories/:category_id",
   validate(Validation.getProductByCategorySchema),
   Handler.getProductByCategoryHandler
 );
@@ -29,7 +38,7 @@ router.post(
   Handler.createProductHandler
 );
 router.post(
-  "/category",
+  "/categories",
   verifyJWTProduct,
   validate(Validation.createCategorySchema),
   Handler.createCategoryHandler
@@ -41,7 +50,7 @@ router.put(
   Handler.editProductHandler
 );
 router.put(
-  "/category/:category_id",
+  "/categories/:category_id",
   verifyJWTProduct,
   validate(Validation.editCategorySchema),
   Handler.editCategoryHandler

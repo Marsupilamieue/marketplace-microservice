@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
+    "resolveJsonModule": true,
     "module": "CommonJS" /* Specify what module code is generated. */,
     "rootDir": "." /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
     "outDir": "./dist" /* Specify an output folder for all emitted files. */,

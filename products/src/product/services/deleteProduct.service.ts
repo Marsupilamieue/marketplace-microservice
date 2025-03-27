@@ -12,6 +12,15 @@ export const deleteProductService = async (id: string) => {
 
     const product = await deleteProductById(SERVER_TENANT_ID, id);
 
+    if (!product) {
+      return {
+        data: {
+          error: `Product with id '${id}' not found`,
+        },
+        status: 404,
+      };
+    }
+
     return {
       data: {
         ...product,

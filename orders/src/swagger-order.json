@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace-Order",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8002"
+    }
+  ],
+  "paths": {
+    "/cart/": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get Cart Item",
+        "description": "Get Cart Item",
+        "operationId": "getCartItem",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Edit Cart Item",
+        "description": "Edit Cart Item",
+        "operationId": "editCartItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cart_id": {
+                    "type": "string",
+                    "example": "01583bb6-834c-4da3-9aaf-fe798983f8cb"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "example": 9
+                  }
+                }
+              },
+              "examples": {
+                "Edit Cart Item": {
+                  "value": {
+                    "cart_id": "01583bb6-834c-4da3-9aaf-fe798983f8cb",
+                    "quantity": 9
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Add Item to Cart",
+        "description": "Add Item to Cart",
+        "operationId": "addItemToCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "example": "469bf3ec-3b76-474d-80e3-dee004eaa10b"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "example": 10
+                  }
+                }
+              },
+              "examples": {
+                "Add Item to Cart": {
+                  "value": {
+                    "product_id": "469bf3ec-3b76-474d-80e3-dee004eaa10b",
+                    "quantity": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Delete Cart Item",
+        "description": "Delete Cart Item",
+        "operationId": "deleteCartItem",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/order/": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get All Order",
+        "description": "Get All Order",
+        "operationId": "getAllOrder",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Create Order",
+        "description": "Create Order",
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipping_provider": {
+                    "type": "string",
+                    "example": "JNE"
+                  }
+                }
+              },
+              "examples": {
+                "Create Order": {
+                  "value": {
+                    "shipping_provider": "JNE"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/{orderId}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get All Order By Id",
+        "description": "Get All Order By Id",
+        "operationId": "getAllOrderById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/order/{orderId}/pay": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Pay Order",
+        "description": "Pay Order",
+        "operationId": "payOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": 8000050
+                  },
+                  "payment_method": {
+                    "type": "string",
+                    "example": "COD"
+                  },
+                  "payment_reference": {
+                    "type": "string",
+                    "example": "deafult.png"
+                  }
+                }
+              },
+              "examples": {
+                "Pay Order": {
+                  "value": {
+                    "amount": 8000050,
+                    "payment_method": "COD",
+                    "payment_reference": "deafult.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "42416a4a-9748-4767-b0b7-c26ebd4efa0b"
+          }
+        }
+      ]
+    },
+    "/order/{orderId}/cancel": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Cancel Order",
+        "description": "Cancel Order",
+        "operationId": "cancelOrder",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Order"
+    },
+    {
+      "name": "Cart"
+    }
+  ]
+}

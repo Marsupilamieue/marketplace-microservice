@@ -39,7 +39,6 @@ export const verifyJWTProduct = async (
         },
       }
     );
-    console.log("sdauhdusahsu");
 
     if (tenantResponse.status !== 200 || !tenantResponse.data?.tenants) {
       return res.status(500).send({ message: "Server Tenant not found" });

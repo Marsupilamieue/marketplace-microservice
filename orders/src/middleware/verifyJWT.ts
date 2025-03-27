@@ -30,7 +30,6 @@ export const verifyJWT = async (
     }
 
     req.body.user = decoded;
-
     next();
   } catch (error) {
     return res

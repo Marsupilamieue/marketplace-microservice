@@ -1,0 +1,202 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace-Wishlist",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8005"
+    }
+  ],
+  "paths": {
+    "/wishlist/": {
+      "get": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get All Wishlist",
+        "description": "Get All Wishlist",
+        "operationId": "getAllWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Create Wishlist",
+        "description": "Create Wishlist",
+        "operationId": "createWishlist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Wishlist 2025"
+                  }
+                }
+              },
+              "examples": {
+                "Create Wishlist": {
+                  "value": {
+                    "name": "Wishlist 2025"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/wishlist/{Id}": {
+      "get": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get Wishlist By Id",
+        "description": "Get Wishlist By Id",
+        "operationId": "getWishlistById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Update Wishlist",
+        "description": "Update Wishlist",
+        "operationId": "updateWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Delete Wishlist",
+        "description": "Delete Wishlist",
+        "operationId": "deleteWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/wishlist/add": {
+      "post": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Add Product to Wishlist",
+        "description": "Add Product to Wishlist",
+        "operationId": "addProductToWishlist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "example": "469bf3ec-3b76-474d-80e3-dee004eaa10b"
+                  },
+                  "wishlist_id": {
+                    "type": "string",
+                    "example": "f98e3529-63f3-465d-aca5-80813e578648"
+                  }
+                }
+              },
+              "examples": {
+                "Add Product to Wishlist": {
+                  "value": {
+                    "product_id": "469bf3ec-3b76-474d-80e3-dee004eaa10b",
+                    "wishlist_id": "f98e3529-63f3-465d-aca5-80813e578648"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/wishlist/remove": {
+      "delete": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Remove Product From Wishlist",
+        "description": "Remove Product From Wishlist",
+        "operationId": "removeProductFromWishlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Wishlist"
+    }
+  ]
+}

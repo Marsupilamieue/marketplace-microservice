@@ -18,8 +18,6 @@ const metricsMiddleware = express_prom_bundle({
 });
 
 const app = express();
-app.use(metricsMiddleware);
-app.use(cors());
 app.use(express.json());
 
 // Routes

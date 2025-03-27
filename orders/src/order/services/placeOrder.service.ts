@@ -40,9 +40,16 @@ export const placeOrderService = async (
     if (productIds.length === 0) {
       return new BadRequestResponse("Cart is empty").generate();
     }
+    const productUrl = `${process.env.PRODUCT_MS_URL}/v2/products/bulk`;
+    console.log("Fetching products from:", productUrl); // Debugging
+    console.log("Payload:", { productIds }); // Debugging
+
     const products = await axios.post(
-      `${process.env.PRODUCT_MS_URL}/product/many`,
-      { productIds }
+      productUrl,
+      { productIds },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
     );
     if (products.status !== 200) {
       return new InternalServerErrorResponse(

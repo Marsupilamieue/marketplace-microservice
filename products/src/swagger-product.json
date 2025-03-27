@@ -1,0 +1,799 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace-Product",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8003"
+    }
+  ],
+  "paths": {
+    "/product/": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get All Product",
+        "description": "Get All Product",
+        "operationId": "getAllProduct",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": ["Product"],
+        "summary": "Create Product",
+        "description": "Create Product",
+        "operationId": "createProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "string",
+                    "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Hp bagus tapi overprice 3"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Iphone 20"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 800005
+                  },
+                  "quantity_available": {
+                    "type": "number",
+                    "example": 900
+                  }
+                }
+              },
+              "examples": {
+                "Create Product": {
+                  "value": {
+                    "category_id": "54833864-76e4-43c2-b188-1d9e013b7665",
+                    "description": "Hp bagus tapi overprice 3",
+                    "name": "Iphone 20",
+                    "price": 800005,
+                    "quantity_available": 900
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/product/category": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get All Category",
+        "description": "Get All Category",
+        "operationId": "getAllCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Product"],
+        "summary": "Create Category",
+        "description": "Create Category",
+        "operationId": "createCategory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Hape"
+                  }
+                }
+              },
+              "examples": {
+                "Create Category": {
+                  "value": {
+                    "name": "Hape"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/product/{Id}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get Product By Id",
+        "description": "Get Product By Id",
+        "operationId": "getProductById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": ["Product"],
+        "summary": "Edit Product",
+        "description": "Edit Product",
+        "operationId": "editProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Samung"
+                  }
+                }
+              },
+              "examples": {
+                "Edit Product": {
+                  "value": {
+                    "name": "Samung"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Product"],
+        "summary": "Delete Product",
+        "description": "Delete Product",
+        "operationId": "deleteProduct",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/product/category/{categoryId}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get Product By Category",
+        "description": "Get Product By Category",
+        "operationId": "getProductByCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": ["Product"],
+        "summary": "Edit Category",
+        "description": "Edit Category",
+        "operationId": "editCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Product"],
+        "summary": "Delete Category",
+        "description": "Delete Category",
+        "operationId": "deleteCategory",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "categoryId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/product/many": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "Get Many Product By Id",
+        "description": "Get Many Product By Id",
+        "operationId": "getManyProductById",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/products/": {
+      "get": {
+        "tags": ["Product V2"],
+        "summary": "Get All Products",
+        "description": "Retrieve a list of all available products.",
+        "operationId": "getAllProduct1",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all products.",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "products": {
+                      "id": "38d75aee-310b-49d6-992b-bd0afd461532",
+                      "tenant_id": "47dd6b24-0b23-46b0-a662-776158d089ba",
+                      "name": "Iphone 14",
+                      "description": "Hp bagus tapi overprice 2",
+                      "price": 800000,
+                      "quantity_available": 900,
+                      "category_id": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Product V2"],
+        "summary": "Create Product",
+        "description": "Create Product",
+        "operationId": "createProduct1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "string",
+                    "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Hp bagus tapi overprice 3"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Iphone 20"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 800005
+                  },
+                  "quantity_available": {
+                    "type": "number",
+                    "example": 900
+                  }
+                }
+              },
+              "examples": {
+                "Create Product": {
+                  "value": {
+                    "category_id": "54833864-76e4-43c2-b188-1d9e013b7665",
+                    "description": "Hp bagus tapi overprice 3",
+                    "name": "Iphone 20",
+                    "price": 800005,
+                    "quantity_available": 900
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Product successfully created.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "c5b5658c-85eb-438d-990d-d719ebc2ee79",
+                  "name": "Iphone 20",
+                  "description": "Hp bagus tapi overprice 3",
+                  "price": 800005,
+                  "quantity_available": 900
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. The provided product data is invalid or missing required fields."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/products/categories": {
+      "get": {
+        "tags": ["Product V2"],
+        "summary": "Get All Category",
+        "description": "Get All Category",
+        "operationId": "getAllCategory1",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all categories.",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "categories": [
+                      {
+                        "id": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f",
+                        "name": "Elektronik",
+                        "tenant_id": "47dd6b24-0b23-46b0-a662-776158d089ba"
+                      },
+                      {
+                        "id": "43ce47cf-cb18-46ea-850d-b2730b2cdfc4",
+                        "name": "Perabotan",
+                        "tenant_id": "47dd6b24-0b23-46b0-a662-776158d089ba"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Product V2"],
+        "summary": "Create Category",
+        "description": "Create Category",
+        "operationId": "createCategory1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Hape"
+                  }
+                }
+              },
+              "examples": {
+                "Create Category": {
+                  "value": {
+                    "name": "Hape"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category successfully created.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "3",
+                  "name": "Hape"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. The category name is invalid or missing."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/products/{Id}": {
+      "get": {
+        "tags": ["Product V2"],
+        "summary": "Get Product By Id",
+        "description": "Get Product By Id",
+        "operationId": "getProductById1",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the product details.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "12345",
+                  "name": "Iphone 20",
+                  "description": "Hp bagus tapi overprice 3",
+                  "price": 800005,
+                  "quantity_available": 900,
+                  "category_id": "54833864-76e4-43c2-b188-1d9e013b7665"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. No product found with the given ID."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        }
+      },
+      "put": {
+        "tags": ["Product V2"],
+        "summary": "Edit Product",
+        "description": "Edit Product",
+        "operationId": "editProduct1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Samung"
+                  }
+                }
+              },
+              "examples": {
+                "Edit Product": {
+                  "value": {
+                    "name": "Samsung Galaxy S30",
+                    "description": "Smartphone terbaru dari Samsung",
+                    "price": 12000000,
+                    "quantity_available": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product successfully updated.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "12345",
+                  "name": "Samsung Galaxy S30",
+                  "description": "Smartphone terbaru dari Samsung",
+                  "price": 12000000,
+                  "quantity_available": 500
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Invalid input or missing required fields."
+          },
+          "404": {
+            "description": "Not Found. No product found with the given ID."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Product V2"],
+        "summary": "Delete Product",
+        "description": "Delete Product",
+        "operationId": "deleteProduct1",
+        "responses": {
+          "200": {
+            "description": "Product successfully deleted."
+          },
+          "404": {
+            "description": "Not Found. No product found with the given ID."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "Id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/v2/products/categories/{categoryId}": {
+      "get": {
+        "tags": ["Product V2"],
+        "summary": "Get Product By Category",
+        "description": "Get Product By Category",
+        "operationId": "getProductByCategory1",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved products by category.",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "products": [
+                      {
+                        "id": "38d75aee-310b-49d6-992b-bd0afd461532",
+                        "tenant_id": "47dd6b24-0b23-46b0-a662-776158d089ba",
+                        "name": "Iphone 14",
+                        "description": "Hp bagus tapi overprice 2",
+                        "price": 800000,
+                        "quantity_available": 900,
+                        "category_id": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+                      },
+                      {
+                        "id": "31f01a0d-13e2-4834-ba8e-f3a63ca34d81",
+                        "tenant_id": "47dd6b24-0b23-46b0-a662-776158d089ba",
+                        "name": "Iphone 15",
+                        "description": "Hp bagus tapi overprice 3",
+                        "price": 800005,
+                        "quantity_available": 900,
+                        "category_id": "6bf400d4-f81f-4a3c-a8e0-6c9e86d9673f"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        }
+      },
+      "put": {
+        "tags": ["Product V2"],
+        "summary": "Edit Category",
+        "description": "Edit Category",
+        "operationId": "editCategory1",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the category to update.",
+            "schema": {
+              "type": "string",
+              "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Smartphones"
+                  }
+                }
+              },
+              "examples": {
+                "Edit Category": {
+                  "value": {
+                    "name": "Smartphones"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category successfully updated.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "54833864-76e4-43c2-b188-1d9e013b7665",
+                  "name": "Smartphones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Invalid category name or missing required fields."
+          },
+          "404": {
+            "description": "Not Found. No category found with the given ID."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Product V2"],
+        "summary": "Delete Category",
+        "description": "Delete Category",
+        "operationId": "deleteCategory1",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the category to delete.",
+            "schema": {
+              "type": "string",
+              "example": "54833864-76e4-43c2-b188-1d9e013b7665"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category successfully deleted."
+          },
+          "404": {
+            "description": "Not Found. No category found with the given ID."
+          },
+          "401": {
+            "description": "Unauthorized. Bearer token is missing or invalid."
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "categoryId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      ]
+    },
+    "/v2/products/bulk": {
+      "post": {
+        "tags": ["Product V2"],
+        "summary": "Get Many Product By Id",
+        "description": "Get Many Product By Id",
+        "operationId": "getManyProductById1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Product"
+    },
+    {
+      "name": "Product V2"
+    }
+  ]
+}
