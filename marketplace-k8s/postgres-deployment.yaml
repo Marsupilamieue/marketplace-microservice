@@ -1,4 +1,162 @@
-# Deployment untuk PostgreSQL (Authentication)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: marketplace
+
+---
+# Persistent Volumes (PV)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: auth-db-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  hostPath:
+    path: "/mnt/data/auth-db"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: orders-db-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  hostPath:
+    path: "/mnt/data/orders-db"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: products-db-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  hostPath:
+    path: "/mnt/data/products-db"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tenant-db-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  hostPath:
+    path: "/mnt/data/tenant-db"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wishlist-db-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  hostPath:
+    path: "/mnt/data/wishlist-db"
+
+---
+# Persistent Volume Claims (PVC)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: auth-db-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  volumeName: auth-db-pv
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: orders-db-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  volumeName: orders-db-pv
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: products-db-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  volumeName: products-db-pv
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tenant-db-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  volumeName: tenant-db-pv
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wishlist-db-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  volumeName: wishlist-db-pv
+
+---
+# PostgreSQL Deployments and Services
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,35 +173,26 @@ spec:
         app: auth-db
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: AUTH_DB_NAME
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_PASSWORD
-        volumeMounts:
-        - name: auth-db-storage
-          mountPath: "/var/lib/postgresql/data"
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: auth_db
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/postgresql/data"
       volumes:
-      - name: auth-db-storage
-        persistentVolumeClaim:
-          claimName: auth-db-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: auth-db-pvc
 
-# Service untuk PostgreSQL (Authentication) - ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -54,26 +203,11 @@ spec:
   selector:
     app: auth-db
   ports:
-  - port: 5432
-    targetPort: 5432
-
-# Persistent Volume Claim untuk PostgreSQL (Authentication)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: auth-db-pvc
-  namespace: marketplace
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: hostpath
+    - port: 5432
+      targetPort: 5432
 
 ---
-
-# Deployment untuk PostgreSQL (Orders)
+# Orders DB
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -90,35 +224,26 @@ spec:
         app: orders-db
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: ORDERS_DB_NAME
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_PASSWORD
-        volumeMounts:
-        - name: orders-db-storage
-          mountPath: "/var/lib/postgresql/data"
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: orders_db
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/postgresql/data"
       volumes:
-      - name: orders-db-storage
-        persistentVolumeClaim:
-          claimName: orders-db-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: orders-db-pvc
 
-# Service untuk PostgreSQL (Orders) - ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -129,26 +254,11 @@ spec:
   selector:
     app: orders-db
   ports:
-  - port: 5432
-    targetPort: 5432
-
-# Persistent Volume Claim untuk PostgreSQL (Orders)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: orders-db-pvc
-  namespace: marketplace
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: hostpath
+    - port: 5432
+      targetPort: 5432
 
 ---
-
-# Deployment untuk PostgreSQL (Products)
+# Products DB
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -165,35 +275,26 @@ spec:
         app: products-db
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: PRODUCTS_DB_NAME
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_PASSWORD
-        volumeMounts:
-        - name: products-db-storage
-          mountPath: "/var/lib/postgresql/data"
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: products_db
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/postgresql/data"
       volumes:
-      - name: products-db-storage
-        persistentVolumeClaim:
-          claimName: products-db-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: products-db-pvc
 
-# Service untuk PostgreSQL (Products) - ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -204,26 +305,11 @@ spec:
   selector:
     app: products-db
   ports:
-  - port: 5432
-    targetPort: 5432
-
-# Persistent Volume Claim untuk PostgreSQL (Products)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: products-db-pvc
-  namespace: marketplace
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: hostpath
+    - port: 5432
+      targetPort: 5432
 
 ---
-
-# Deployment untuk PostgreSQL (Tenant)
+# Tenant DB
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -240,35 +326,26 @@ spec:
         app: tenant-db
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: TENANT_DB_NAME
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_PASSWORD
-        volumeMounts:
-        - name: tenant-db-storage
-          mountPath: "/var/lib/postgresql/data"
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: tenant_db
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/postgresql/data"
       volumes:
-      - name: tenant-db-storage
-        persistentVolumeClaim:
-          claimName: tenant-db-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: tenant-db-pvc
 
-# Service untuk PostgreSQL (Tenant) - ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -279,26 +356,11 @@ spec:
   selector:
     app: tenant-db
   ports:
-  - port: 5432
-    targetPort: 5432
-
-# Persistent Volume Claim untuk PostgreSQL (Tenant)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: tenant-db-pvc
-  namespace: marketplace
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: hostpath
+    - port: 5432
+      targetPort: 5432
 
 ---
-
-# Deployment untuk PostgreSQL (Wishlist)
+# Wishlist DB
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -315,35 +377,26 @@ spec:
         app: wishlist-db
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: WISHLIST_DB_NAME
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: marketplace-secret
-              key: DB_PASSWORD
-        volumeMounts:
-        - name: wishlist-db-storage
-          mountPath: "/var/lib/postgresql/data"
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: wishlist_db
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/postgresql/data"
       volumes:
-      - name: wishlist-db-storage
-        persistentVolumeClaim:
-          claimName: wishlist-db-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: wishlist-db-pvc
 
-# Service untuk PostgreSQL (Wishlist) - ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -354,19 +407,5 @@ spec:
   selector:
     app: wishlist-db
   ports:
-  - port: 5432
-    targetPort: 5432
-
-# Persistent Volume Claim untuk PostgreSQL (Wishlist)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wishlist-db-pvc
-  namespace: marketplace
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: hostpath
+    - port: 5432
+      targetPort: 5432
