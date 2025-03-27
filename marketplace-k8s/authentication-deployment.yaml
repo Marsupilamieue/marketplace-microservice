@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-deployment
+  namespace: marketplace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      labels:
+        app: authentication
+    spec:
+      containers:
+      - name: authentication
+        image: tugas1_sol-auth:latest
+        ports:
+        - containerPort: 8001
+        env:
+        - name: TENANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: TENANT_ID
+        - name: ADMIN_TENANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: ADMIN_TENANT_ID
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: JWT_SECRET
+        - name: ADMIN_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: ADMIN_JWT_SECRET
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: AUTH_DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: AUTH_DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: AUTH_DB_NAME
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_PASSWORD
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentication-service
+  namespace: marketplace
+spec:
+  type: NodePort
+  selector:
+    app: authentication
+  ports:
+  - port: 8001
+    targetPort: 8001
+    nodePort: 30001

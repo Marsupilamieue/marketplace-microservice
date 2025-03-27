@@ -1,0 +1,107 @@
+# Deployment untuk Products
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deployment
+  namespace: marketplace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+      - name: products
+        image: tugas1_sol-products
+        ports:
+        - containerPort: 8003
+        env:
+        - name: TENANT_ID
+          value: "2d19ceab-e22a-427c-80e1-b004013b090f" # Khusus untuk products
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: JWT_SECRET
+        - name: AUTH_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: AUTH_API_URL
+        - name: TENANT_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: TENANT_API_URL
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: PRODUCTS_DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: PRODUCTS_DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: PRODUCTS_DB_NAME
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_PASSWORD
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: products-storage
+          mountPath: "/data"
+      volumes:
+      - name: products-storage
+        persistentVolumeClaim:
+          claimName: products-pvc
+
+# Service untuk Products (NodePort)
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+  namespace: marketplace
+spec:
+  type: NodePort
+  selector:
+    app: products
+  ports:
+  - port: 8003
+    targetPort: 8003
+    nodePort: 30003
+
+# Persistent Volume Claim untuk Products
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: products-pvc
+  namespace: marketplace
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard

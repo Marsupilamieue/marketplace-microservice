@@ -1,0 +1,84 @@
+# Deployment untuk Wishlist
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wishlist-deployment
+  namespace: marketplace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wishlist
+  template:
+    metadata:
+      labels:
+        app: wishlist
+    spec:
+      containers:
+      - name: wishlist
+        image: tugas1_sol-wishlist
+        ports:
+        - containerPort: 8005
+        env:
+        - name: TENANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: TENANT_ID
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: JWT_SECRET
+        - name: AUTH_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: AUTH_API_URL
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: WISHLIST_DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: WISHLIST_DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: WISHLIST_DB_NAME
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_PASSWORD
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+# Service untuk Wishlist (NodePort)
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist-service
+  namespace: marketplace
+spec:
+  type: NodePort
+  selector:
+    app: wishlist
+  ports:
+  - port: 8005
+    targetPort: 8005
+    nodePort: 30005
