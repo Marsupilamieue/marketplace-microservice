@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: auth-postgres
+  namespace: marketplace
+spec:
+  serviceName: auth-postgres-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-postgres
+  template:
+    metadata:
+      labels:
+        app: auth-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "marketplace-auth"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: marketplace-secret
+              key: DB_PASSWORD
+        volumeMounts:
+        - name: auth-postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: auth-postgres-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-postgres-service
+  namespace: marketplace
+spec:
+  selector:
+    app: auth-postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+  clusterIP: None

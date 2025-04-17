@@ -4,7 +4,7 @@ metadata:
   name: authentication-deployment
   namespace: marketplace
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: authentication
@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: authentication
-        image: tugas1_sol-auth:latest
+        image: marsupilamieue/marketplace-authentication:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8001
         env:
@@ -24,16 +25,16 @@ spec:
             configMapKeyRef:
               name: marketplace-config
               key: TENANT_ID
-        - name: ADMIN_TENANT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: marketplace-config
-              key: ADMIN_TENANT_ID
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: marketplace-secret
               key: JWT_SECRET
+        - name: ADMIN_TENANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: marketplace-config
+              key: ADMIN_TENANT_ID
         - name: ADMIN_JWT_SECRET
           valueFrom:
             secretKeyRef:
@@ -71,7 +72,7 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
-
+---
 apiVersion: v1
 kind: Service
 metadata:

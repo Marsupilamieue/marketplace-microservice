@@ -18,9 +18,6 @@ RUN pnpm run build
 # Generate migration dengan Drizzle
 RUN pnpm exec drizzle-kit generate:pg
 
-# Jalankan migrasi setelah generate
-RUN node dist/src/db/migrate.js
-
 # Production image
 FROM node:18.18.2-slim
 
@@ -41,6 +38,5 @@ RUN pnpm install --prod --frozen-lockfile
 
 EXPOSE 8001
 
+# Jalankan migrasi dan server saat container berjalan
 CMD ["sh", "-c", "node dist/src/db/migrate.js && node dist/src/server.js"]
-
-
